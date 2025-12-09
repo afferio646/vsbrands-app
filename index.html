@@ -816,17 +816,15 @@ function updateProjectVariables() {
 function closeProjectModal() {
     document.getElementById('projectModal').classList.add('hidden');
     
-    // Safely clear only the fields that exist using optional chaining (?.)
-    // This prevents the 'Cannot set properties of null' error.
+    // Use optional chaining (?.) to safely clear only the fields that are present in the HTML.
     document.getElementById('projectName')?.value = '';
     document.getElementById('propertyAddress')?.value = '';
     document.getElementById('scanNotes')?.value = '';
     
-    // Reset the franchise selector if you want it blank for the next scan
+    // Manually ensure the franchise selector reset is safe.
     const selector = document.getElementById('franchiseSelect');
     if (selector) {
         selector.value = '';
-        // Also manually trigger the dynamic variable reset
         updateProjectVariables();
     }
 
@@ -847,9 +845,10 @@ function saveProjectAndContinue() {
         date: new Date().toLocaleString()
     };
     
+    // 1. Safely close the modal (must be done before navigation)
     closeProjectModal();
 
-    // Determine which franchise sample to load directly into the Analysis View
+    // 2. Determine which franchise sample to load
     let sampleKeyToLoad = 'water'; // MACH ONE® Epoxy Floors (default/water)
     
     if (franchiseSelect === 'parking') {
@@ -860,7 +859,7 @@ function saveProjectAndContinue() {
         sampleKeyToLoad = 'athletic'; // FIELD OPS® Athletic Field Markings
     }
     
-    // Jump directly to the Analysis View with the correct sample image loaded
+    // 3. Jump directly to the Analysis View with the correct sample image loaded
     selectSample(sampleKeyToLoad); 
 }
         function showSamples() {
