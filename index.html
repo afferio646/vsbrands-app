@@ -631,26 +631,26 @@ textarea.form-input {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
-        const samples = {
+        const samples = {
             water: {
-                image: 'https://i.imgur.com/sVkNhey.jpg',
+                image: 'https://i.imgur.com/k6lD3xS.jpg', // NEW: Industrial Floor
                 confidence: 92,
                 issue: {
-                    type: 'Commercial Floor Coating Estimate',
+                    type: 'MACH ONE® Floor Coating Estimate',
                     location: '2,500 sq ft Concrete Warehouse Floor',
                     severity: 'medium',
                     desc: 'AI determined the floor is 2500 sq ft, concrete, and in fair condition. Estimated cost includes diamond grinding prep and two coats of mid-grade epoxy. Labor includes minor crack repair and joint filling. Picture analysis suggests existing oil staining will require additional degreasing prep.',
                     confidence: 92,
                     cost: '$11,250 - $15,000', // $4.50 - $6.00 / sq ft
                     urgency: '10-14 day project lead time',
-                    box: { top: '40%', left: '20%', width: '35%', height: '30%' }
+                    box: { top: '30%', left: '20%', width: '60%', height: '50%' }
                 }
             },
             corrosion: {
-                image: 'https://i.imgur.com/6jrvabV.jpg',
+                image: 'https://i.imgur.com/mYtYy4l.jpg', // NEW: Parking Lot Striping
                 confidence: 95,
                 issue: {
-                    type: 'Parking Lot Striping Estimate',
+                    type: 'G-FORCE® Parking Lot Striping Estimate',
                     location: '150 Standard Stalls & 5 Accessible Spaces',
                     severity: 'medium',
                     desc: 'AI calculated 150 standard stalls and 5 accessible spaces are visible. Estimate includes line preparation (sweeping/cleaning), standard white/yellow acrylic paint, and specialty blue paint/stencil for accessible spots. Suggests minor patching may be needed before striping.',
@@ -661,10 +661,10 @@ textarea.form-input {
                 }
             },
             crack: {
-                image: 'https://i.imgur.com/AnkAyMC.jpg',
+                image: 'https://i.imgur.com/vH9Z2zL.jpg', // NEW: Commercial Painting
                 confidence: 88,
                 issue: {
-                    type: 'Commercial Interior Painting Estimate',
+                    type: 'PAINT CORPS® Commercial Interior Painting Estimate',
                     location: '3,000 sq ft Office Walls, 2 Coats',
                     severity: 'low',
                     desc: 'AI estimated 3000 sq ft of wall area visible. Estimate covers labor for patching nail holes/scuffs, minor drywall repair, taping, and application of two coats of high-quality commercial paint. Requires two full days of work for a crew of 3. Trim work is excluded.',
@@ -672,9 +672,25 @@ textarea.form-input {
                     cost: '$6,000 - $9,000', // $2.00 - $3.00 / sq ft
                     urgency: '2-4 weeks booking lead time',
                     box: { top: '15%', left: '20%', width: '60%', height: '70%' }
+                }
+            },
+                        
+            athletic: { // <-- ADD THIS NEW SAMPLE ENTRY
+                image: 'https://i.imgur.com/8Q6V9xL.jpg', // Image of painted field lines
+                confidence: 91,
+                issue: {
+                    type: 'FIELD OPS® Field Marking Estimate',
+                    location: 'Standard High School Soccer Field',
+                    severity: 'low',
+                    desc: 'AI confirmed standard dimensions for a regulation soccer field. Estimate covers highly visible, non-toxic, temporary turf paint suitable for natural grass. Price reflects labor for initial layout and marking one full field. No major turf repair required based on visual.',
+                    confidence: 91,
+                    cost: '$450 - $700', 
+                    urgency: '2-3 days project lead time',
+                    box: { top: '30%', left: '15%', width: '70%', height: '60%' }
                 }
             }
         };
+                
         let currentSample = null;
         let currentProject = {
     name: '',
@@ -814,7 +830,7 @@ function saveProjectAndContinue() {
         alert('Please enter a **Project Name** AND select a **Franchise Project Type**.');
         return;
     }
-
+    
     currentProject = {
         name: projectName,
         address: document.getElementById('propertyAddress').value.trim(),
@@ -822,9 +838,23 @@ function saveProjectAndContinue() {
         franchise: franchiseSelect,
         date: new Date().toLocaleString()
     };
-
+    
     closeProjectModal();
-    showSamples(); 
+    
+    // NEW LOGIC: Skip the Sample Selection screen and load a sample directly.
+    
+    // We select a sample based on the franchise key used in the modal:
+    let sampleKeyToLoad = 'water'; // Default to floors sample
+    if (franchiseSelect === 'parking') {
+        sampleKeyToLoad = 'corrosion'; // Use the parking sample data
+    } else if (franchiseSelect === 'painting') {
+        sampleKeyToLoad = 'crack'; // Use the painting sample data
+    } else if (franchiseSelect === 'athletic') {
+        sampleKeyToLoad = 'athletic'; // FIELD OPS
+    }
+    
+    // Call the selectSample function to jump directly to the camera/analysis view
+    selectSample(sampleKeyToLoad); 
 }
         function showSamples() {
             document.getElementById('dashboardView').classList.add('hidden');
