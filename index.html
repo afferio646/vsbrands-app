@@ -798,33 +798,33 @@ function updateProjectVariables() {
 }
 
 function closeProjectModal() {
-    document.getElementById('projectModal').classList.add('hidden');
-    // Clear the form
-    document.getElementById('projectName').value = '';
-    document.getElementById('propertyAddress').value = '';
-    document.getElementById('clientName').value = '';
-    document.getElementById('scanNotes').value = '';
+    document.getElementById('projectModal').classList.add('hidden');
+    // Clear the form fields that still exist in the HTML
+    document.getElementById('projectName').value = '';
+    document.getElementById('propertyAddress').value = '';
+    // document.getElementById('clientName').value = ''; <-- THIS WAS THE PROBLEM LINE
+    document.getElementById('scanNotes').value = '';
 }
 
 function saveProjectAndContinue() {
-    const projectName = document.getElementById('projectName').value.trim();
-    const franchiseSelect = document.getElementById('franchiseSelect').value;
+    const projectName = document.getElementById('projectName').value.trim();
+    const franchiseSelect = document.getElementById('franchiseSelect').value;
 
-    if (!projectName || !franchiseSelect) {
-        alert('Please enter a project name AND select a franchise project type.');
-        return;
-    }
-    
-    currentProject = {
-        name: projectName,
-        address: document.getElementById('propertyAddress').value.trim(),
-        notes: document.getElementById('scanNotes').value.trim(),
-        franchise: franchiseSelect,
-        date: new Date().toLocaleString()
-    };
-    
-    closeProjectModal();
-    showSamples(); 
+    if (!projectName || !franchiseSelect) {
+        alert('Please enter a **Project Name** AND select a **Franchise Project Type**.');
+        return;
+    }
+
+    currentProject = {
+        name: projectName,
+        address: document.getElementById('propertyAddress').value.trim(),
+        notes: document.getElementById('scanNotes').value.trim(),
+        franchise: franchiseSelect,
+        date: new Date().toLocaleString()
+    };
+
+    closeProjectModal();
+    showSamples(); 
 }
         function showSamples() {
             document.getElementById('dashboardView').classList.add('hidden');
