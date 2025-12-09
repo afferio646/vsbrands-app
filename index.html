@@ -814,13 +814,21 @@ function updateProjectVariables() {
 }
 
 function closeProjectModal() {
-    document.getElementById('projectModal').classList.add('hidden');
-    // Clear the form fields that still exist in the HTML
-    document.getElementById('projectName').value = '';
-    document.getElementById('propertyAddress').value = '';
-    // document.getElementById('clientName').value = ''; <-- THIS WAS THE PROBLEM LINE
-    document.getElementById('scanNotes').value = '';
-}
+    document.getElementById('projectModal').classList.add('hidden');
+    
+    // Safely clear only the fields that exist using optional chaining (?.)
+    // This prevents the 'Cannot set properties of null' error.
+    document.getElementById('projectName')?.value = '';
+    document.getElementById('propertyAddress')?.value = '';
+    document.getElementById('scanNotes')?.value = '';
+    
+    // Reset the franchise selector if you want it blank for the next scan
+    const selector = document.getElementById('franchiseSelect');
+    if (selector) {
+        selector.value = '';
+        // Also manually trigger the dynamic variable reset
+        updateProjectVariables();
+    }
 
 function saveProjectAndContinue() {
     const projectName = document.getElementById('projectName').value.trim();
