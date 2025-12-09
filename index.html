@@ -478,7 +478,7 @@ textarea.form-input {
                 </div>
             </div>
 
-            <div class="action-card">
+           <div class="action-card" onclick="openProjectModal()">
                 <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 20px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
                     <svg style="width: 40px; height: 40px; stroke: white; stroke-width: 2; fill: none;" viewBox="0 0 24 24">
                         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
@@ -487,7 +487,7 @@ textarea.form-input {
                 </div>
                 <h2>Start New Project Estimate</h2>
                 <p>Select a service, upload a photo, and input dimensions to receive a preliminary cost estimate from the VS Brands team.</p>
-                <button class="btn-primary" style="margin-top: 1.5rem;" **id="startEstimateBtn"**>Begin Estimate</button>
+                <button class="btn-primary" style="margin-top: 1.5rem;">Begin Estimate</button>
             </div>
         </div>
 
@@ -1148,15 +1148,7 @@ try {
    const filename = 'VSBrands_Estimate_' + new Date().toISOString().slice(0,10) + '.pdf';
     doc.save(filename);
 }
-        // --- Modal Activation Script ---
-document.addEventListener('DOMContentLoaded', () => {
-    // Finds the button we added the ID to and attaches the event handler
-    const startButton = document.getElementById('startEstimateBtn');
-    if (startButton) {
-        startButton.addEventListener('click', openProjectModal);
-    }
-});
-// --- End Modal Activation Script ---
+
     </script>
 </body>
 </html>
