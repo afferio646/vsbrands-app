@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StructureScan AI - Professional Demo</title>
+    <title><title>VS Brands Project Estimator - Demo</title></title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -451,9 +451,9 @@ textarea.form-input {
 <body>
     <div class="header">
         <div style="max-width: 1200px; margin: 0 auto;">
-            <h1>StructureScan AI</h1>
-            <p class="subtitle">Professional Structural Analysis & Damage Detection</p>
-            <div class="company-tag">Powered by Restoration Experts Inc</div>
+            <h1>VS Brands Project Estimator</h1>
+            <p class="subtitle">Quick Estimate Utility for Veteran Service Brands</p>
+            <div class="company-tag">A Veteran Service Brands Solution</div>
         </div>
     </div>
 
@@ -501,22 +501,22 @@ textarea.form-input {
                 <div class="sample-card" onclick="selectSample('water')">
                     <img src='https://i.imgur.com/sVkNhey.jpg'w=400&h=300&fit=crop" class="sample-image" alt="Water Damage">
                     <div class="sample-info">
-                        <div class="sample-title">Water Damage - Wall</div>
-                        <div class="sample-desc">Visible water staining with potential mold growth</div>
+                        <div class="sample-title">Floor Coatings (Epoxy)</div>
+                        <div class="sample-desc">Warehouse/Garage Floor Estimate</div>
                     </div>
                 </div>
                 <div class="sample-card" onclick="selectSample('crack')">
                     <img src='https://i.imgur.com/AnkAyMC.jpg'w=400&h=300&fit=crop" class="sample-image" alt="Wall Crack">
                     <div class="sample-info">
-                        <div class="sample-title">Structural Crack - Wall</div>
-                        <div class="sample-desc">Vertical crack indicating settlement issues</div>
+                        <div class="sample-title">Commercial Painting</div>
+                        <div class="sample-desc">Office/Retail Painting Estimate</div>
                     </div>
                 </div>
                 <div class="sample-card" onclick="selectSample('corrosion')">
                     <img src='https://i.imgur.com/6jrvabV.jpg'w=400&h=300&fit=crop" class="sample-image" alt="Pipe Corrosion">
                     <div class="sample-info">
-                        <div class="sample-title">Pipe Corrosion</div>
-                        <div class="sample-desc">Metal corrosion on exposed plumbing</div>
+                        <div class="sample-title">Parking Lot Striping</div>
+                        <div class="sample-desc">Re-stripe Existing Lot Lines Estimate</div>
                     </div>
                 </div>
             </div>
@@ -591,23 +591,37 @@ textarea.form-input {
             <button class="modal-close" onclick="closeProjectModal()">×</button>
         </div>
         <div class="modal-body">
+                        <div class="form-group">
+                <label>Project Name / Lead ID</label>
+                <input type="text" id="projectName" placeholder="e.g., Office Floor Renovation" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label>Project Location (Optional)</label>
+                <input type="text" id="propertyAddress" placeholder="e.g., Building 1, Lot A" class="form-input">
+            </div>
+            
             <div class="form-group">
-                <label>Project Name</label>
-                <input type="text" id="projectName" placeholder="e.g., 123 Main Street Inspection" class="form-input">
+                <label>Franchise Project Type</label>
+               <select id="franchiseSelect" class="form-input" onchange="updateProjectVariables()" required>
+    <option value="">-- Select a Service Brand --</option>
+    <option value="floors">MACH ONE® Epoxy Floors</option>
+    <option value="parking">G-FORCE® Parking Lot Striping</option>
+    <option value="athletic">FIELD OPS® Athletic Field Markings</option>
+    <option value="painting">PAINT CORPS® Painting Services</option>
+</select>
             </div>
-            <div class="form-group">
-                <label>Property Address (Optional)</label>
-                <input type="text" id="propertyAddress" placeholder="e.g., 123 Main St, Fort Wayne, IN" class="form-input">
+            
+            <div id="dynamicVariables">
+                <div class="form-group">
+                    <p style="color: var(--text-secondary);">Select a **Franchise Project Type** above to see required inputs.</p>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Client Name (Optional)</label>
-                <input type="text" id="clientName" placeholder="e.g., John Smith" class="form-input">
-            </div>
-            <div class="form-group">
-                <label>Notes (Optional)</label>
-                <textarea id="scanNotes" placeholder="Add any relevant notes..." class="form-input" rows="3"></textarea>
-            </div>
-        </div>
+            
+                        <div class="form-group">
+                <label>Notes (Optional)</label>
+                <textarea id="scanNotes" placeholder="Describe the project (e.g., current condition, desired color)..." class="form-input" rows="3"></textarea>
+            </div>
+        </div>
         <div class="modal-footer">
             <button class="btn-secondary" onclick="closeProjectModal()">Cancel</button>
             <button class="btn-primary" onclick="saveProjectAndContinue()">Continue to Scan</button>
@@ -618,50 +632,50 @@ textarea.form-input {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         const samples = {
-            water: {
-                image: 'https://i.imgur.com/sVkNhey.jpg',
-                confidence: 94,
-                issue: {
-                    type: 'Water Damage & Mold Growth',
-                    location: 'Baseboard - Lower Wall Section',
-                    severity: 'high',
-                    desc: 'Active water intrusion with visible mold growth and paint deterioration. Dark staining indicates prolonged moisture exposure. Immediate remediation required to prevent health hazards and structural damage.',
-                    confidence: 94,
-                    cost: '$2,400-$3,800',
-                    urgency: '7-14 days',
-                    box: { top: '40%', left: '20%', width: '35%', height: '30%' }
-                }
-            },
-            corrosion: {
-                image: 'https://i.imgur.com/6jrvabV.jpg',
-                confidence: 96,
-                issue: {
-                    type: 'Severe Pipe Corrosion',
-                    location: 'Exposed Plumbing Lines - Basement',
-                    severity: 'high',
-                    desc: 'Advanced corrosion with heavy rust buildup and material degradation. Multiple connection points compromised. Critical failure risk - pipe replacement urgent to prevent catastrophic water damage and flooding.',
-                    confidence: 96,
-                    cost: '$1,800-$3,200',
-                    urgency: '7-21 days',
-                    box: { top: '35%', left: '30%', width: '40%', height: '35%' }
-                }
-            },
-            crack: {
-                image: 'https://i.imgur.com/AnkAyMC.jpg',
-                confidence: 89,
-                issue: {
-                    type: 'Structural Crack Pattern',
-                    location: 'Interior Wall - Main Structure',
-                    severity: 'medium',
-                    desc: 'Multiple stress cracks detected across wall surface. Pattern indicates structural settlement or foundation movement. Significant cracking visible throughout. Monitoring and repair recommended to prevent progression.',
-                    confidence: 89,
-                    cost: '$1,200-$2,400',
-                    urgency: '30-60 days',
-                    box: { top: '15%', left: '20%', width: '60%', height: '70%' }
-                }
-            }
-        };
-
+           const samples = {
+            water: {
+                image: 'https://i.imgur.com/sVkNhey.jpg',
+                confidence: 92,
+                issue: {
+                    type: 'Commercial Floor Coating Estimate',
+                    location: '2,500 sq ft Concrete Warehouse Floor',
+                    severity: 'medium',
+                    desc: 'AI determined the floor is 2500 sq ft, concrete, and in fair condition. Estimated cost includes diamond grinding prep and two coats of mid-grade epoxy. Labor includes minor crack repair and joint filling. Picture analysis suggests existing oil staining will require additional degreasing prep.',
+                    confidence: 92,
+                    cost: '$11,250 - $15,000', // $4.50 - $6.00 / sq ft
+                    urgency: '10-14 day project lead time',
+                    box: { top: '40%', left: '20%', width: '35%', height: '30%' }
+                }
+            },
+            corrosion: {
+                image: 'https://i.imgur.com/6jrvabV.jpg',
+                confidence: 95,
+                issue: {
+                    type: 'Parking Lot Striping Estimate',
+                    location: '150 Standard Stalls & 5 Accessible Spaces',
+                    severity: 'medium',
+                    desc: 'AI calculated 150 standard stalls and 5 accessible spaces are visible. Estimate includes line preparation (sweeping/cleaning), standard white/yellow acrylic paint, and specialty blue paint/stencil for accessible spots. Suggests minor patching may be needed before striping.',
+                    confidence: 95,
+                    cost: '$3,500 - $4,800', // Typical commercial lot
+                    urgency: '5-7 day scheduling window',
+                    box: { top: '35%', left: '30%', width: '40%', height: '35%' }
+                }
+            },
+            crack: {
+                image: 'https://i.imgur.com/AnkAyMC.jpg',
+                confidence: 88,
+                issue: {
+                    type: 'Commercial Interior Painting Estimate',
+                    location: '3,000 sq ft Office Walls, 2 Coats',
+                    severity: 'low',
+                    desc: 'AI estimated 3000 sq ft of wall area visible. Estimate covers labor for patching nail holes/scuffs, minor drywall repair, taping, and application of two coats of high-quality commercial paint. Requires two full days of work for a crew of 3. Trim work is excluded.',
+                    confidence: 88,
+                    cost: '$6,000 - $9,000', // $2.00 - $3.00 / sq ft
+                    urgency: '2-4 weeks booking lead time',
+                    box: { top: '15%', left: '20%', width: '60%', height: '70%' }
+                }
+            }
+        };
         let currentSample = null;
         let currentProject = {
     name: '',
@@ -670,7 +684,110 @@ textarea.form-input {
     notes: ''
 };
 
+// --- NEW FRANCHISE ESTIMATOR LOGIC ---
 
+// Function to update the input fields based on the selected franchise
+function updateProjectVariables() {
+    const selector = document.getElementById('franchiseSelect');
+    const variablesDiv = document.getElementById('dynamicVariables');
+    const selection = selector.value;
+    let htmlContent = '';
+
+    // Define the input fields for each franchise type
+    switch (selection) {
+        case 'floors':
+            htmlContent = `
+                <div class="form-group">
+                    <label>Project Area (Square Feet)</label>
+                    <input type="number" id="projectArea" name="projectArea" placeholder="Enter total area in sq ft (e.g., 2000)" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Existing Surface Type</label>
+                    <select id="surfaceType" name="surfaceType" class="form-input" required>
+                        <option value="concrete">Concrete (Standard)</option>
+                        <option value="aged_concrete">Aged/Damaged Concrete (Requires more prep)</option>
+                        <option value="existing_coating">Existing Coating (Requires removal)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Desired Coating Type</label>
+                    <select id="coatingType" name="coatingType" class="form-input" required>
+                        <option value="standard_epoxy">Standard Epoxy</option>
+                        <option value="polyurea">Advanced Polyurea/Polyaspartic</option>
+                        <option value="urethane">Urethane/Sealant</option>
+                    </select>
+                </div>
+            `;
+            break;
+        case 'parking':
+            htmlContent = `
+                <div class="form-group">
+                    <label>Number of Standard Stalls to Re-stripe</label>
+                    <input type="number" id="stallsCount" name="stallsCount" placeholder="e.g., 100" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Number of Accessible/Specialty Spaces</label>
+                    <input type="number" id="accessibleCount" name="accessibleCount" placeholder="e.g., 4 (requires stencils/logos)" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Is New Layout Required?</label>
+                    <select id="newLayout" name="newLayout" class="form-input" required>
+                        <option value="no">No, re-stripe existing lines</option>
+                        <option value="yes">Yes, new layout plan/measurements needed</option>
+                    </select>
+                </div>
+            `;
+            break;
+        case 'athletic':
+            htmlContent = `
+                <div class="form-group">
+                    <label>Field Type</label>
+                    <select id="fieldType" name="fieldType" class="form-input" required>
+                        <option value="soccer">Standard Soccer Field</option>
+                        <option value="football">Standard Football Field</option>
+                        <option value="track">Running Track/Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Lining Method</label>
+                    <select id="liningMethod" name="liningMethod" class="form-input" required>
+                        <option value="natural">Natural Grass (Temporary Paint)</option>
+                        <option value="turf">Artificial Turf (Permanent/Specialty Paint)</option>
+                    </select>
+                </div>
+            `;
+            break;
+        case 'painting':
+            htmlContent = `
+                <div class="form-group">
+                    <label>Estimated Wall Surface Area (Square Feet)</label>
+                    <input type="number" id="projectArea" name="projectArea" placeholder="Enter total wall area (e.g., 4500)" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Location / Number of Coats</label>
+                    <select id="locationCoats" name="locationCoats" class="form-input" required>
+                        <option value="interior_2">Interior - 2 Coats (Standard)</option>
+                        <option value="exterior_2">Exterior - 2 Coats</option>
+                        <option value="commercial_high">Commercial Interior - High Traffic/Durable Paint</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Trim/Accent Work?</label>
+                    <select id="trimWork" name="trimWork" class="form-input" required>
+                        <option value="no">No, walls only</option>
+                        <option value="yes">Yes, includes trim/accents (additional labor)</option>
+                    </select>
+                </div>
+            `;
+            break;
+        default:
+            htmlContent = '<div class="form-group"><p style="color: var(--text-secondary);">Select a **Franchise Project Type** above to see required inputs.</p></div>';
+    }
+
+    variablesDiv.innerHTML = htmlContent;
+}
+
+// --- END NEW FRANCHISE ESTIMATOR LOGIC ---
         function showDashboard() {
             document.getElementById('dashboardView').classList.remove('hidden');
             document.getElementById('sampleView').classList.add('hidden');
@@ -698,16 +815,26 @@ function saveProjectAndContinue() {
         return;
     }
     
+    // ... (inside function saveProjectAndContinue)
+    const projectName = document.getElementById('projectName').value.trim();
+    const franchiseSelect = document.getElementById('franchiseSelect').value;
+
+    if (!projectName || !franchiseSelect) {
+        alert('Please enter a project name AND select a franchise project type.');
+        return;
+    }
+    
     currentProject = {
         name: projectName,
         address: document.getElementById('propertyAddress').value.trim(),
-        client: document.getElementById('clientName').value.trim(),
         notes: document.getElementById('scanNotes').value.trim(),
+        franchise: franchiseSelect, // <-- NEW: Store the selected franchise key
         date: new Date().toLocaleString()
     };
     
     closeProjectModal();
-    showSamples();
+    // After saving, we now jump straight to the Sample/Image Selection View
+    showSamples(); 
 }
         function showSamples() {
             document.getElementById('dashboardView').classList.add('hidden');
@@ -752,6 +879,7 @@ function saveProjectAndContinue() {
                 }
                 
                 if (progress === 60) {
+                    generateGeminiPrompt();
                     showDetectionBox();
                 }
                 
@@ -789,16 +917,19 @@ function saveProjectAndContinue() {
             const issue = currentSample.issue;
             
             document.getElementById('timestamp').textContent = new Date().toLocaleString();
-// Add project info to results if exists
+// Add project info to results
 if (currentProject.name) {
-    const projectInfo = `
-        <div style="background: var(--bg-card); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 3px solid var(--primary);">
-            <div style="font-weight: 600; margin-bottom: 0.5rem;">Project: ${currentProject.name}</div>
-            ${currentProject.address ? `<div style="font-size: 0.875rem; color: var(--text-secondary);">Address: ${currentProject.address}</div>` : ''}
-            ${currentProject.client ? `<div style="font-size: 0.875rem; color: var(--text-secondary);">Client: ${currentProject.client}</div>` : ''}
-        </div>
-    `;
-    document.querySelector('#resultsView h2').insertAdjacentHTML('afterend', projectInfo);
+    const franchiseName = document.getElementById('franchiseSelect')?.options[document.getElementById('franchiseSelect').selectedIndex].text || 'N/A';
+    
+    const projectInfo = `
+        <div style="background: var(--bg-card); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 3px solid var(--primary);">
+            <div style="font-size: 0.875rem; color: var(--text-secondary);">Project Type:</div>
+            <div style="font-weight: 600; margin-bottom: 0.5rem;">${franchiseName}</div>
+            <div style="font-size: 0.875rem; color: var(--text-secondary);">Project Name: ${currentProject.name}</div>
+            ${currentProject.address ? `<div style="font-size: 0.875rem; color: var(--text-secondary);">Location: ${currentProject.address}</div>` : ''}
+        </div>
+    `;
+    document.querySelector('#resultsView h2').insertAdjacentHTML('afterend', projectInfo);
 }
             document.getElementById('resultImage').src = currentSample.image;
             document.getElementById('confidenceValue').textContent = currentSample.confidence + '%';
@@ -861,12 +992,12 @@ async function exportPDF() {
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(24);
     doc.setFont(undefined, 'bold');
-    doc.text('StructureScan AI', m, 20);
+    doc.text('VS Brands Project Estimator', m, 20);
     
     doc.setFontSize(10);
     doc.setFont(undefined, 'normal');
-    doc.text('Professional Structural Analysis Report', m, 28);
-    doc.text('Powered by Restoration Experts Inc', m, 34);
+    doc.text('AI-Powered Project Estimate Report', m, 28);
+    doc.text('Powered by Veteran Service Brands', m, 34);
     
     // Metadata box
     doc.setTextColor(0, 0, 0);
@@ -897,7 +1028,7 @@ async function exportPDF() {
     doc.setTextColor(0, 0, 0);
     doc.setFont(undefined, 'normal');
     
-    const sum = 'AI-powered structural analysis has identified critical issues requiring immediate attention. This report provides detailed findings, severity assessment, and recommended actions based on advanced computer vision algorithms.';
+    const sum = 'AI-powered analysis report provides detailed findings, assessment, and recommended actions based on advanced computer vision algorithms.';
     const sumLines = doc.splitTextToSize(sum, cw);
     doc.text(sumLines, m, y);
     y += sumLines.length * 5 + 10;
@@ -911,7 +1042,7 @@ async function exportPDF() {
     doc.setFontSize(14);
     doc.setFont(undefined, 'bold');
     doc.setTextColor(220, 38, 38);
-    doc.text('⚠ Critical Finding', m + 5, y + 8);
+    doc.text('💰 Project Estimate', m + 5, y + 8);
     
     doc.setFontSize(11);
     doc.setTextColor(0, 0, 0);
@@ -997,7 +1128,7 @@ try {
     doc.setFontSize(8);
     doc.setTextColor(100, 100, 100);
     doc.setFont(undefined, 'italic');
-    const disclaimer = 'This report is generated by AI-assisted analysis and should be verified by qualified professionals. Restoration Experts Inc provides this analysis as a preliminary assessment tool.';
+    const disclaimer = 'This preliminary estimate is generated by AI-assisted analysis based on user inputs. The final project cost requires a local franchise inspection. Estimate provided by Veteran Service Brands.' 
     const disclaimerLines = doc.splitTextToSize(disclaimer, cw);
     doc.text(disclaimerLines, m, footerY);
     
@@ -1014,7 +1145,7 @@ try {
     }
     
     // Save the PDF
-    const filename = 'StructureScan_Report_' + new Date().toISOString().slice(0,10) + '.pdf';
+   const filename = 'VSBrands_Estimate_' + new Date().toISOString().slice(0,10) + '.pdf';
     doc.save(filename);
 }
     </script>
