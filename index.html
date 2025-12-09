@@ -840,20 +840,19 @@ function saveProjectAndContinue() {
     };
     
     closeProjectModal();
+
+    // Determine which franchise sample to load directly into the Analysis View
+    let sampleKeyToLoad = 'water'; // MACH ONE® Epoxy Floors (default/water)
     
-    // NEW LOGIC: Skip the Sample Selection screen and load a sample directly.
-    
-    // We select a sample based on the franchise key used in the modal:
-    let sampleKeyToLoad = 'water'; // Default to floors sample
     if (franchiseSelect === 'parking') {
-        sampleKeyToLoad = 'corrosion'; // Use the parking sample data
+        sampleKeyToLoad = 'corrosion'; // G-FORCE® Parking Lot Striping
     } else if (franchiseSelect === 'painting') {
-        sampleKeyToLoad = 'crack'; // Use the painting sample data
+        sampleKeyToLoad = 'crack'; // PAINT CORPS® Painting Services
     } else if (franchiseSelect === 'athletic') {
-        sampleKeyToLoad = 'athletic'; // FIELD OPS
+        sampleKeyToLoad = 'athletic'; // FIELD OPS® Athletic Field Markings
     }
     
-    // Call the selectSample function to jump directly to the camera/analysis view
+    // Jump directly to the Analysis View with the correct sample image loaded
     selectSample(sampleKeyToLoad); 
 }
         function showSamples() {
