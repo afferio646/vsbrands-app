@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -479,16 +480,16 @@ textarea.form-input {
             </div>
 
            <div class="action-card" onclick="openProjectModal()">
-                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 20px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
-                    <svg style="width: 40px; height: 40px; stroke: white; stroke-width: 2; fill: none;" viewBox="0 0 24 24">
-                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                        <circle cx="12" cy="13" r="4"></circle>
-                    </svg>
-                </div>
-                <h2>Start New Project Estimate</h2>
-                <p>Select a service, upload a photo, and input dimensions to receive a preliminary cost estimate from the VS Brands team.</p>
-                <button class="btn-primary" style="margin-top: 1.5rem;">Begin Estimate</button>
-            </div>
+                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 20px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
+                    <svg style="width: 40px; height: 40px; stroke: white; stroke-width: 2; fill: none;" viewBox="0 0 24 24">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                        <circle cx="12" cy="13" r="4"></circle>
+                    </svg>
+                </div>
+                <h2>Start New Project Estimate</h2>
+                <p>Select a service, upload a photo, and input dimensions to receive a preliminary cost estimate from the VS Brands team.</p>
+                <button class="btn-primary" style="margin-top: 1.5rem;">Begin Estimate</button>
+            </div>
         </div>
 
         <!-- Sample Selection -->
@@ -591,15 +592,15 @@ textarea.form-input {
             <button class="modal-close" onclick="closeProjectModal()">×</button>
         </div>
         <div class="modal-body">
-                        <div class="form-group">
-                <label>Project Name / Lead ID</label>
-                <input type="text" id="projectName" placeholder="e.g., Office Floor Renovation" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label>Project Location (Optional)</label>
-                <input type="text" id="propertyAddress" placeholder="e.g., Building 1, Lot A" class="form-input">
-            </div>
-            
+                        <div class="form-group">
+                <label>Project Name / Lead ID</label>
+                <input type="text" id="projectName" placeholder="e.g., Office Floor Renovation" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label>Project Location (Optional)</label>
+                <input type="text" id="propertyAddress" placeholder="e.g., Building 1, Lot A" class="form-input">
+            </div>
+            
             <div class="form-group">
                 <label>Franchise Project Type</label>
                <select id="franchiseSelect" class="form-input" onchange="updateProjectVariables()" required>
@@ -617,621 +618,527 @@ textarea.form-input {
                 </div>
             </div>
             
-                        <div class="form-group">
-                <label>Notes (Optional)</label>
-                <textarea id="scanNotes" placeholder="Describe the project (e.g., current condition, desired color)..." class="form-input" rows="3"></textarea>
-            </div>
-        </div>
+                        <div class="form-group">
+                <label>Notes (Optional)</label>
+                <textarea id="scanNotes" placeholder="Describe the project (e.g., current condition, desired color)..." class="form-input" rows="3"></textarea>
+            </div>
+        </div>
         <div class="modal-footer">
             <button class="btn-secondary" onclick="closeProjectModal()">Cancel</button>
             <button class="btn-primary" onclick="saveProjectAndContinue()">Continue to Scan</button>
         </div>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script>
-    const samples = {
-        water: {
-            image: 'https://i.imgur.com/k6lD3xS.jpg', // MACH ONE - Industrial Floor
-            confidence: 92,
-            issue: {
-                type: 'MACH ONE® Floor Coating Estimate',
-                location: '2,500 sq ft Concrete Warehouse Floor',
-                severity: 'medium',
-                desc: 'AI determined the floor is 2500 sq ft, concrete, and in fair condition. Estimated cost includes diamond grinding prep and two coats of mid-grade epoxy. Labor includes minor crack repair and joint filling. Picture analysis suggests existing oil staining will require additional degreasing prep.',
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        const samples = {
+            water: {
+                image: 'https://i.imgur.com/sVkNhey.jpg',
                 confidence: 92,
-                cost: '$11,250 - $15,000',
-                urgency: '10-14 day project lead time',
-                box: { top: '30%', left: '20%', width: '60%', height: '50%' }
-            }
-        },
-        corrosion: {
-            image: 'https://i.imgur.com/mYtYy4l.jpg', // G-FORCE - Parking Lot Striping
-            confidence: 95,
-            issue: {
-                type: 'G-FORCE® Parking Lot Striping Estimate',
-                location: '150 Standard Stalls & 5 Accessible Spaces',
-                severity: 'medium',
-                desc: 'AI calculated 150 standard stalls and 5 accessible spaces are visible. Estimate includes line preparation (sweeping/cleaning), standard white/yellow acrylic paint, and specialty blue paint/stencil for accessible spots. Suggests minor patching may be needed before striping.',
+                issue: {
+                    type: 'Commercial Floor Coating Estimate',
+                    location: '2,500 sq ft Concrete Warehouse Floor',
+                    severity: 'medium',
+                    desc: 'AI determined the floor is 2500 sq ft, concrete, and in fair condition. Estimated cost includes diamond grinding prep and two coats of mid-grade epoxy. Labor includes minor crack repair and joint filling. Picture analysis suggests existing oil staining will require additional degreasing prep.',
+                    confidence: 92,
+                    cost: '$11,250 - $15,000', // $4.50 - $6.00 / sq ft
+                    urgency: '10-14 day project lead time',
+                    box: { top: '40%', left: '20%', width: '35%', height: '30%' }
+                }
+            },
+            corrosion: {
+                image: 'https://i.imgur.com/6jrvabV.jpg',
                 confidence: 95,
-                cost: '$3,500 - $4,800',
-                urgency: '5-7 day scheduling window',
-                box: { top: '35%', left: '30%', width: '40%', height: '35%' }
-            }
-        },
-        crack: {
-            image: 'https://i.imgur.com/vH9Z2zL.jpg', // PAINT CORPS - Commercial Painting
-            confidence: 88,
-            issue: {
-                type: 'PAINT CORPS® Commercial Interior Painting Estimate',
-                location: '3,000 sq ft Office Walls, 2 Coats',
-                severity: 'low',
-                desc: 'AI estimated 3000 sq ft of wall area visible. Estimate covers labor for patching nail holes/scuffs, minor drywall repair, taping, and application of two coats of high-quality commercial paint. Requires two full days of work for a crew of 3. Trim work is excluded.',
+                issue: {
+                    type: 'Parking Lot Striping Estimate',
+                    location: '150 Standard Stalls & 5 Accessible Spaces',
+                    severity: 'medium',
+                    desc: 'AI calculated 150 standard stalls and 5 accessible spaces are visible. Estimate includes line preparation (sweeping/cleaning), standard white/yellow acrylic paint, and specialty blue paint/stencil for accessible spots. Suggests minor patching may be needed before striping.',
+                    confidence: 95,
+                    cost: '$3,500 - $4,800', // Typical commercial lot
+                    urgency: '5-7 day scheduling window',
+                    box: { top: '35%', left: '30%', width: '40%', height: '35%' }
+                }
+            },
+            crack: {
+                image: 'https://i.imgur.com/AnkAyMC.jpg',
                 confidence: 88,
-                cost: '$6,000 - $9,000',
-                urgency: '2-4 weeks booking lead time',
-                box: { top: '15%', left: '20%', width: '60%', height: '70%' }
+                issue: {
+                    type: 'Commercial Interior Painting Estimate',
+                    location: '3,000 sq ft Office Walls, 2 Coats',
+                    severity: 'low',
+                    desc: 'AI estimated 3000 sq ft of wall area visible. Estimate covers labor for patching nail holes/scuffs, minor drywall repair, taping, and application of two coats of high-quality commercial paint. Requires two full days of work for a crew of 3. Trim work is excluded.',
+                    confidence: 88,
+                    cost: '$6,000 - $9,000', // $2.00 - $3.00 / sq ft
+                    urgency: '2-4 weeks booking lead time',
+                    box: { top: '15%', left: '20%', width: '60%', height: '70%' }
+                }
             }
-        },
-        athletic: { // FIELD OPS - Athletic Field Markings
-            image: 'https://i.imgur.com/8Q6V9xL.jpg',
-            confidence: 91,
-            issue: {
-                type: 'FIELD OPS® Field Marking Estimate',
-                location: 'Standard High School Soccer Field',
-                severity: 'low',
-                desc: 'AI confirmed standard dimensions for a regulation soccer field. Estimate covers highly visible, non-toxic, temporary turf paint suitable for natural grass. Price reflects labor for initial layout and marking one full field. No major turf repair required based on visual.',
-                confidence: 91,
-                cost: '$450 - $700',
-                urgency: '2-3 days project lead time',
-                box: { top: '30%', left: '15%', width: '70%', height: '60%' }
-            }
-        }
-    };
-
-    let currentSample = null;
-    let currentProject = {
-        name: '',
-        address: '',
-        notes: '',
-        franchise: ''
-    };
-
-    // --- CORE NAVIGATION FUNCTIONS ---
-
-    function showDashboard() {
-        document.getElementById('dashboardView').classList.remove('hidden');
-        document.getElementById('sampleView').classList.add('hidden');
-        document.getElementById('cameraView').classList.add('hidden');
-        document.getElementById('resultsView').classList.add('hidden');
-    }
-
-    function openProjectModal() {
-        document.getElementById('projectModal').classList.remove('hidden');
-    }
-
-    function closeProjectModal() {
-        document.getElementById('projectModal').classList.add('hidden');
-        
-        // Use optional chaining (?.) to safely clear only the fields that are present in the HTML.
-        document.getElementById('projectName')?.value = '';
-        document.getElementById('propertyAddress')?.value = '';
-        document.getElementById('scanNotes')?.value = '';
-        
-        // Manually ensure the franchise selector reset is safe.
-        const selector = document.getElementById('franchiseSelect');
-        if (selector) {
-            selector.value = '';
-            updateProjectVariables();
-        }
-    }
-
-    // THIS FUNCTION IS NOW DEFINED GLOBALLY, NOT INSIDE closeProjectModal
-    function saveProjectAndContinue() {
-        const projectName = document.getElementById('projectName').value.trim();
-        const franchiseSelect = document.getElementById('franchiseSelect').value;
-
-        if (!projectName || !franchiseSelect) {
-            alert('Please enter a **Project Name** AND select a **Franchise Project Type**.');
-            return;
-        }
-        
-        currentProject = {
-            name: projectName,
-            address: document.getElementById('propertyAddress')?.value.trim(),
-            notes: document.getElementById('scanNotes')?.value.trim(),
-            franchise: franchiseSelect,
-            date: new Date().toLocaleString()
         };
-        
-        closeProjectModal();
+        let currentSample = null;
+        let currentProject = {
+    name: '',
+    address: '',
+    client: '',
+    notes: ''
+};
 
-        // Determine which franchise sample to load
-        let sampleKeyToLoad = 'water'; 
-        
-        if (franchiseSelect === 'parking') {
-            sampleKeyToLoad = 'corrosion'; 
-        } else if (franchiseSelect === 'painting') {
-            sampleKeyToLoad = 'crack'; 
-        } else if (franchiseSelect === 'athletic') {
-            sampleKeyToLoad = 'athletic'; 
-        }
-        
-        selectSample(sampleKeyToLoad); 
-    }
+// --- NEW FRANCHISE ESTIMATOR LOGIC ---
 
-    function showSamples() {
-        document.getElementById('dashboardView').classList.add('hidden');
-        document.getElementById('sampleView').classList.remove('hidden');
-        document.getElementById('cameraView').classList.add('hidden');
-        document.getElementById('resultsView').classList.add('hidden');
-    }
+// Function to update the input fields based on the selected franchise
+function updateProjectVariables() {
+    const selector = document.getElementById('franchiseSelect');
+    const variablesDiv = document.getElementById('dynamicVariables');
+    const selection = selector.value;
+    let htmlContent = '';
 
-    function selectSample(type) {
-        currentSample = samples[type];
-        document.getElementById('sampleView').classList.add('hidden');
-        document.getElementById('cameraView').classList.remove('hidden');
-        document.getElementById('previewImage').src = currentSample.image;
-        document.getElementById('detectionOverlay').innerHTML = '';
-        document.getElementById('analysisStatus').classList.add('hidden');
-        document.getElementById('analyzeBtn').disabled = false;
-    }
-
-    // --- DYNAMIC FORM UPDATE ---
-    function updateProjectVariables() {
-        const selector = document.getElementById('franchiseSelect');
-        const variablesDiv = document.getElementById('dynamicVariables');
-        const selection = selector.value;
-        let htmlContent = '';
-
-        switch (selection) {
-            case 'floors':
-                htmlContent = `
-                    <div class="form-group">
-                        <label>Project Area (Square Feet)</label>
-                        <input type="number" id="projectArea" name="projectArea" placeholder="Enter total area in sq ft (e.g., 2000)" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Existing Surface Type</label>
-                        <select id="surfaceType" name="surfaceType" class="form-input" required>
-                            <option value="concrete">Concrete (Standard)</option>
-                            <option value="aged_concrete">Aged/Damaged Concrete (Requires more prep)</option>
-                            <option value="existing_coating">Existing Coating (Requires removal)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Desired Coating Type</label>
-                        <select id="coatingType" name="coatingType" class="form-input" required>
-                            <option value="standard_epoxy">Standard Epoxy</option>
-                            <option value="polyurea">Advanced Polyurea/Polyaspartic</option>
-                            <option value="urethane">Urethane/Sealant</option>
-                        </select>
-                    </div>
-                `;
-                break;
-            case 'parking':
-                htmlContent = `
-                    <div class="form-group">
-                        <label>Number of Standard Stalls to Re-stripe</label>
-                        <input type="number" id="stallsCount" name="stallsCount" placeholder="e.g., 100" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Number of Accessible/Specialty Spaces</label>
-                        <input type="number" id="accessibleCount" name="accessibleCount" placeholder="e.g., 4 (requires stencils/logos)" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Is New Layout Required?</label>
-                        <select id="newLayout" name="newLayout" class="form-input" required>
-                            <option value="no">No, re-stripe existing lines</option>
-                            <option value="yes">Yes, new layout plan/measurements needed</option>
-                        </select>
-                    </div>
-                `;
-                break;
-            case 'athletic':
-                htmlContent = `
-                    <div class="form-group">
-                        <label>Field Type</label>
-                        <select id="fieldType" name="fieldType" class="form-input" required>
-                            <option value="soccer">Standard Soccer Field</option>
-                            <option value="football">Standard Football Field</option>
-                            <option value="track">Running Track/Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Lining Method</label>
-                        <select id="liningMethod" name="liningMethod" class="form-input" required>
-                            <option value="natural">Natural Grass (Temporary Paint)</option>
-                            <option value="turf">Artificial Turf (Permanent/Specialty Paint)</option>
-                        </select>
-                    </div>
-                `;
-                break;
-            case 'painting':
-                htmlContent = `
-                    <div class="form-group">
-                        <label>Estimated Wall Surface Area (Square Feet)</label>
-                        <input type="number" id="projectArea" name="projectArea" placeholder="Enter total wall area (e.g., 4500)" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Location / Number of Coats</label>
-                        <select id="locationCoats" name="locationCoats" class="form-input" required>
-                            <option value="interior_2">Interior - 2 Coats (Standard)</option>
-                            <option value="exterior_2">Exterior - 2 Coats</option>
-                            <option value="commercial_high">Commercial Interior - High Traffic/Durable Paint</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Trim/Accent Work?</label>
-                        <select id="trimWork" name="trimWork" class="form-input" required>
-                            <option value="no">No, walls only</option>
-                            <option value="yes">Yes, includes trim/accents (additional labor)</option>
-                        </select>
-                    </div>
-                `;
-                break;
-            default:
-                htmlContent = '<div class="form-group"><p style="color: var(--text-secondary);">Select a **Franchise Project Type** above to see required inputs.</p></div>';
-        }
-
-        variablesDiv.innerHTML = htmlContent;
-    }
-
-    // --- AI PROMPT GENERATOR ---
-    function generateGeminiPrompt() {
-        const franchiseKey = currentProject.franchise;
-        const notes = currentProject.notes;
-        let specificVariables = '';
-        let roleInstruction = '';
-        
-        if (franchiseKey === 'floors') {
-            const area = document.getElementById('projectArea')?.value || 'N/A';
-            const surfaceType = document.getElementById('surfaceType')?.value || 'N/A';
-            const coatingType = document.getElementById('coatingType')?.value || 'N/A';
-            specificVariables = `Area: ${area} sq ft. Surface Type: ${surfaceType}. Desired Coating: ${coatingType}.`;
-            roleInstruction = `You are a professional Floor Coating Estimator for a national franchise. Analyze the image and data. Generate a detailed, 5-point report including: [Issue/Condition], [Recommended Coating/Prep], [Estimated Cost Range (per sq ft and total)], [Expected Timeline], and a compelling [Next Step/Call to Action] to contact the local franchise. Use $4.50 to $7.00 per sq ft as a pricing baseline.`;
-        } else if (franchiseKey === 'parking') {
-            const stalls = document.getElementById('stallsCount')?.value || 'N/A';
-            const accessible = document.getElementById('accessibleCount')?.value || 'N/A';
-            const newLayout = document.getElementById('newLayout')?.value || 'N/A';
-            specificVariables = `Standard Stalls: ${stalls}. Accessible: ${accessible}. New Layout Required: ${newLayout}.`;
-            roleInstruction = `You are a Parking Lot Striping Estimator for a national franchise. Analyze the image and data. Generate a detailed, 5-point report including: [Project Scope], [Prep Required], [Estimated Cost Range (per stall and total)], [Work Duration], and a compelling [Next Step/Call to Action] to contact the local franchise. Use $10.00 to $18.00 per standard stall as a pricing baseline.`;
-        } else if (franchiseKey === 'athletic') {
-            const fieldType = document.getElementById('fieldType')?.value || 'N/A';
-            const liningMethod = document.getElementById('liningMethod')?.value || 'N/A';
-            specificVariables = `Field Type: ${fieldType}. Lining Method: ${liningMethod}.`;
-            roleInstruction = `You are an Athletic Field Line Painting Estimator for a national franchise. Analyze the image and data. Generate a detailed, 5-point report including: [Field Summary], [Paint Recommendation], [Estimated Cost Range (flat fee)], [Best Season for Service], and a compelling [Next Step/Call to Action] to contact the local franchise. Use $400 to $850 per field as a pricing baseline.`;
-        } else if (franchiseKey === 'painting') {
-            const area = document.getElementById('projectArea')?.value || 'N/A';
-            const locationCoats = document.getElementById('locationCoats')?.value || 'N/A';
-            const trimWork = document.getElementById('trimWork')?.value || 'N/A';
-            specificVariables = `Area: ${area} sq ft. Location/Coats: ${locationCoats}. Trim Work: ${trimWork}.`;
-            roleInstruction = `You are a Commercial Painting Estimator for a national franchise. Analyze the image and data. Generate a detailed, 5-point report including: [Scope of Work], [Surface Condition/Prep], [Estimated Cost Range (per sq ft and total)], [Project Length], and a compelling [Next Step/Call to Action] to contact the local franchise. Use $2.00 to $3.50 per sq ft as a pricing baseline.`;
-        }
-        
-        const finalPrompt = `
-            Role: ${roleInstruction}
-            Project Name: ${currentProject.name} (Lead ID: VSB-${Math.random().toString(36).substr(2, 6).toUpperCase()})
-            Service: ${franchiseKey.toUpperCase()}
-            Input Variables: ${specificVariables}
-            Facility Manager Notes: ${notes || 'None provided.'}
-            
-            Analyze the image and the variables above to generate the structured report.
-        `;
-        
-        console.log("--- GENERATED GEMINI PROMPT ---");
-        console.log(finalPrompt);
-        console.log("------------------------------");
-    }
-
-    function runAnalysis() {
-        document.getElementById('analyzeBtn').disabled = true;
-        document.getElementById('analysisStatus').classList.remove('hidden');
-        
-        const statuses = [
-            'Initializing AI detection...',
-            'Analyzing image structure...',
-            'Detecting anomalies...',
-            'Measuring damage severity...',
-            'Calculating repair costs...',
-            'Finalizing analysis...'
-        ];
-        
-        let progress = 0;
-        let statusIndex = 0;
-        
-        const interval = setInterval(() => {
-            progress += 2;
-            document.getElementById('progressBar').style.width = progress + '%';
-            
-            if (progress % 17 === 0 && statusIndex < statuses.length) {
-                document.getElementById('statusText').textContent = statuses[statusIndex];
-                statusIndex++;
-            }
-            
-            if (progress === 60) {
-                generateGeminiPrompt(); // Trigger console log
-                showDetectionBox();
-            }
-            
-            if (progress >= 100) {
-                clearInterval(interval);
-                setTimeout(showResults, 800);
-            }
-        }, 60);
-    }
-
-    function showDetectionBox() {
-        const overlay = document.getElementById('detectionOverlay');
-        const issue = currentSample.issue;
-        
-        const box = document.createElement('div');
-        box.className = `detection-box ${issue.severity}`;
-        box.style.top = issue.box.top;
-        box.style.left = issue.box.left;
-        box.style.width = issue.box.width;
-        box.style.height = issue.box.height;
-        
-        const label = document.createElement('div');
-        label.className = 'detection-label';
-        label.textContent = issue.type + ' Detected';
-        label.style.color = issue.severity === 'high' ? '#fca5a5' : '#fcd34d';
-        box.appendChild(label);
-        
-        overlay.appendChild(box);
-    }
-
-    function showResults() {
-        document.getElementById('cameraView').classList.add('hidden');
-        document.getElementById('resultsView').classList.remove('hidden');
-        
-        const issue = currentSample.issue;
-        
-        document.getElementById('timestamp').textContent = new Date().toLocaleString();
-        
-        // Add project info to results
-        if (currentProject.name) {
-            const franchiseName = document.getElementById('franchiseSelect')?.options[document.getElementById('franchiseSelect').selectedIndex].text || 'N/A';
-            
-            const projectInfo = `
-                <div style="background: var(--bg-card); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 3px solid var(--primary);">
-                    <div style="font-size: 0.875rem; color: var(--text-secondary);">Project Type:</div>
-                    <div style="font-weight: 600; margin-bottom: 0.5rem;">${franchiseName}</div>
-                    <div style="font-size: 0.875rem; color: var(--text-secondary);">Project Name: ${currentProject.name}</div>
-                    ${currentProject.address ? `<div style="font-size: 0.875rem; color: var(--text-secondary);">Location: ${currentProject.address}</div>` : ''}
+    // Define the input fields for each franchise type
+    switch (selection) {
+        case 'floors':
+            htmlContent = `
+                <div class="form-group">
+                    <label>Project Area (Square Feet)</label>
+                    <input type="number" id="projectArea" name="projectArea" placeholder="Enter total area in sq ft (e.g., 2000)" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Existing Surface Type</label>
+                    <select id="surfaceType" name="surfaceType" class="form-input" required>
+                        <option value="concrete">Concrete (Standard)</option>
+                        <option value="aged_concrete">Aged/Damaged Concrete (Requires more prep)</option>
+                        <option value="existing_coating">Existing Coating (Requires removal)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Desired Coating Type</label>
+                    <select id="coatingType" name="coatingType" class="form-input" required>
+                        <option value="standard_epoxy">Standard Epoxy</option>
+                        <option value="polyurea">Advanced Polyurea/Polyaspartic</option>
+                        <option value="urethane">Urethane/Sealant</option>
+                    </select>
                 </div>
             `;
-            document.querySelector('#resultsView h2').insertAdjacentHTML('afterend', projectInfo);
-        }
-        
-        document.getElementById('resultImage').src = currentSample.image;
-        document.getElementById('confidenceValue').textContent = currentSample.confidence + '%';
-        document.getElementById('issuesCount').textContent = '1';
-        document.getElementById('costValue').textContent = issue.cost;
-        
-        const resultOverlay = document.getElementById('resultOverlay');
-        resultOverlay.innerHTML = '';
-        const box = document.createElement('div');
-        box.className = `detection-box ${issue.severity}`;
-        box.style.top = issue.box.top;
-        box.style.left = issue.box.left;
-        box.style.width = issue.box.width;
-        box.style.height = issue.box.height;
-        resultOverlay.appendChild(box);
-        
-        document.getElementById('issuesList').innerHTML = `
-            <div class="issue-item">
-                <div class="issue-header-row">
-                    <div>
-                        <div class="issue-title">${issue.type}</div>
-                        <div class="issue-location">${issue.location}</div>
-                    </div>
-                    <div class="severity-badge severity-${issue.severity}">${issue.severity.toUpperCase()}</div>
+            break;
+        case 'parking':
+            htmlContent = `
+                <div class="form-group">
+                    <label>Number of Standard Stalls to Re-stripe</label>
+                    <input type="number" id="stallsCount" name="stallsCount" placeholder="e.g., 100" class="form-input" required>
                 </div>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">${issue.desc}</p>
-                <div class="issue-meta">
-                    <div>
-                        <div class="meta-label">AI Confidence</div>
-                        <div class="meta-value">${issue.confidence}%</div>
-                    </div>
-                    <div>
-                        <div class="meta-label">Est. Cost</div>
-                        <div class="meta-value">${issue.cost}</div>
-                    </div>
-                    <div>
-                        <div class="meta-label">Urgency</div>
-                        <div class="meta-value" style="color: ${issue.severity === 'high' ? 'var(--danger)' : 'var(--warning)'};">${issue.urgency}</div>
-                    </div>
+                <div class="form-group">
+                    <label>Number of Accessible/Specialty Spaces</label>
+                    <input type="number" id="accessibleCount" name="accessibleCount" placeholder="e.g., 4 (requires stencils/logos)" class="form-input" required>
                 </div>
-            </div>
-        `;
-        
-        window.scrollTo(0, 0);
+                <div class="form-group">
+                    <label>Is New Layout Required?</label>
+                    <select id="newLayout" name="newLayout" class="form-input" required>
+                        <option value="no">No, re-stripe existing lines</option>
+                        <option value="yes">Yes, new layout plan/measurements needed</option>
+                    </select>
+                </div>
+            `;
+            break;
+        case 'athletic':
+            htmlContent = `
+                <div class="form-group">
+                    <label>Field Type</label>
+                    <select id="fieldType" name="fieldType" class="form-input" required>
+                        <option value="soccer">Standard Soccer Field</option>
+                        <option value="football">Standard Football Field</option>
+                        <option value="track">Running Track/Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Lining Method</label>
+                    <select id="liningMethod" name="liningMethod" class="form-input" required>
+                        <option value="natural">Natural Grass (Temporary Paint)</option>
+                        <option value="turf">Artificial Turf (Permanent/Specialty Paint)</option>
+                    </select>
+                </div>
+            `;
+            break;
+        case 'painting':
+            htmlContent = `
+                <div class="form-group">
+                    <label>Estimated Wall Surface Area (Square Feet)</label>
+                    <input type="number" id="projectArea" name="projectArea" placeholder="Enter total wall area (e.g., 4500)" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Location / Number of Coats</label>
+                    <select id="locationCoats" name="locationCoats" class="form-input" required>
+                        <option value="interior_2">Interior - 2 Coats (Standard)</option>
+                        <option value="exterior_2">Exterior - 2 Coats</option>
+                        <option value="commercial_high">Commercial Interior - High Traffic/Durable Paint</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Trim/Accent Work?</label>
+                    <select id="trimWork" name="trimWork" class="form-input" required>
+                        <option value="no">No, walls only</option>
+                        <option value="yes">Yes, includes trim/accents (additional labor)</option>
+                    </select>
+                </div>
+            `;
+            break;
+        default:
+            htmlContent = '<div class="form-group"><p style="color: var(--text-secondary);">Select a **Franchise Project Type** above to see required inputs.</p></div>';
     }
 
-    async function exportPDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF('p', 'mm', 'a4');
-        const issue = currentSample.issue;
-        const pw = doc.internal.pageSize.getWidth();
-        const ph = doc.internal.pageSize.getHeight();
-        const m = 20;
-        const cw = pw - (m * 2);
-        
-        // Blue header background
-        doc.setFillColor(37, 99, 235);
-        doc.rect(0, 0, pw, 45, 'F');
-        
-        // Company branding
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(24);
-        doc.setFont(undefined, 'bold');
-        doc.text('VS Brands Project Estimator', m, 20);
-        
-        doc.setFontSize(10);
-        doc.setFont(undefined, 'normal');
-        doc.text('AI-Powered Project Estimate Report', m, 28);
-        doc.text('Powered by Veteran Service Brands', m, 34);
-        
-        // Metadata box
-        doc.setTextColor(0, 0, 0);
-        doc.setFillColor(248, 250, 252);
-        doc.roundedRect(m, 55, cw, 25, 2, 2, 'F');
-        
-        doc.setFontSize(9);
-        doc.setFont(undefined, 'bold');
-        doc.text('Report Date:', m + 5, 63);
-        doc.text('Analysis ID:', m + 5, 70);
-        doc.text('Confidence:', m + 5, 77);
-        
-        doc.setFont(undefined, 'normal');
-        const ts = new Date().toLocaleString();
-        doc.text(ts, m + 30, 63);
-        doc.text('VSB-' + Math.random().toString(36).substr(2, 9).toUpperCase(), m + 30, 70);
-        doc.text(currentSample.confidence + '%', m + 30, 77);
-        
-        // Executive Summary
-        let y = 90;
-        doc.setFontSize(16);
-        doc.setFont(undefined, 'bold');
-        doc.setTextColor(37, 99, 235);
-        doc.text('Executive Summary', m, y);
-        
-        y += 10;
-        doc.setFontSize(10);
-        doc.setTextColor(0, 0, 0);
-        doc.setFont(undefined, 'normal');
-        
-        const sum = 'AI-powered analysis report provides detailed findings, assessment, and recommended actions based on advanced computer vision algorithms.';
-        const sumLines = doc.splitTextToSize(sum, cw);
-        doc.text(sumLines, m, y);
-        y += sumLines.length * 5 + 10;
-        
-        // Critical Finding Alert Box
-        doc.setFillColor(254, 226, 226);
-        doc.setDrawColor(239, 68, 68);
-        doc.setLineWidth(0.5);
-        doc.roundedRect(m, y, cw, 40, 2, 2, 'FD');
-        
-        doc.setFontSize(14);
-        doc.setFont(undefined, 'bold');
-        doc.setTextColor(220, 38, 38);
-        doc.text('💰 Project Estimate', m + 5, y + 8);
-        
-        doc.setFontSize(11);
-        doc.setTextColor(0, 0, 0);
-        doc.text(issue.type, m + 5, y + 16);
-        
-        doc.setFontSize(9);
-        doc.setFont(undefined, 'normal');
-        doc.text('Location: ' + issue.location, m + 5, y + 23);
-        doc.text('Severity: ' + issue.severity.toUpperCase(), m + 5, y + 29);
-        doc.text('Estimated Cost: ' + issue.cost, m + 5, y + 35);
-        
-        y += 50;
-        
-        // Analysis Image Section
-        doc.setFontSize(14);
-        doc.setFont(undefined, 'bold');
-        doc.setTextColor(37, 99, 235);
-        doc.text('Analysis Image', m, y);
-        y += 5;
+    variablesDiv.innerHTML = htmlContent;
+}
 
-        // Add the image directly from URL
-        try {
-            const imgSrc = currentSample.image;
-            doc.addImage(imgSrc, 'JPEG', m, y, cw, 80, undefined, 'FAST');
-            y += 90;
-        } catch (error) {
-            doc.setFontSize(10);
-            doc.setTextColor(100, 100, 100);
-            doc.text('Image URL: ' + currentSample.image, m, y);
-            y += 10;
+// --- END NEW FRANCHISE ESTIMATOR LOGIC ---
+        function showDashboard() {
+            document.getElementById('dashboardView').classList.remove('hidden');
+            document.getElementById('sampleView').classList.add('hidden');
+            document.getElementById('cameraView').classList.add('hidden');
+            document.getElementById('resultsView').classList.add('hidden');
         }
-        
-        // Check if we need a new page
-        if (y > ph - 80) {
+       function openProjectModal() {
+    document.getElementById('projectModal').classList.remove('hidden');
+}
+
+function closeProjectModal() {
+    document.getElementById('projectModal').classList.add('hidden');
+    // Clear the form
+    document.getElementById('projectName').value = '';
+    document.getElementById('propertyAddress').value = '';
+    document.getElementById('scanNotes').value = '';
+}
+
+function saveProjectAndContinue() {
+    const projectName = document.getElementById('projectName').value.trim();
+    const franchiseSelect = document.getElementById('franchiseSelect').value;
+
+    if (!projectName || !franchiseSelect) {
+        alert('Please enter a project name AND select a franchise project type.');
+        return;
+    }
+    
+    currentProject = {
+        name: projectName,
+        address: document.getElementById('propertyAddress').value.trim(),
+        notes: document.getElementById('scanNotes').value.trim(),
+        franchise: franchiseSelect,
+        date: new Date().toLocaleString()
+    };
+    
+    closeProjectModal();
+    showSamples(); 
+}
+        function showSamples() {
+            document.getElementById('dashboardView').classList.add('hidden');
+            document.getElementById('sampleView').classList.remove('hidden');
+            document.getElementById('cameraView').classList.add('hidden');
+            document.getElementById('resultsView').classList.add('hidden');
+        }
+
+        function selectSample(type) {
+            currentSample = samples[type];
+            document.getElementById('sampleView').classList.add('hidden');
+            document.getElementById('cameraView').classList.remove('hidden');
+            document.getElementById('previewImage').src = currentSample.image;
+            document.getElementById('detectionOverlay').innerHTML = '';
+            document.getElementById('analysisStatus').classList.add('hidden');
+            document.getElementById('analyzeBtn').disabled = false;
+        }
+
+        function runAnalysis() {
+            document.getElementById('analyzeBtn').disabled = true;
+            document.getElementById('analysisStatus').classList.remove('hidden');
+            
+            const statuses = [
+                'Initializing AI detection...',
+                'Analyzing image structure...',
+                'Detecting anomalies...',
+                'Measuring damage severity...',
+                'Calculating repair costs...',
+                'Finalizing analysis...'
+            ];
+            
+            let progress = 0;
+            let statusIndex = 0;
+            
+            const interval = setInterval(() => {
+                progress += 2;
+                document.getElementById('progressBar').style.width = progress + '%';
+                
+                if (progress % 17 === 0 && statusIndex < statuses.length) {
+                    document.getElementById('statusText').textContent = statuses[statusIndex];
+                    statusIndex++;
+                }
+                
+                if (progress === 60) {
+                    generateGeminiPrompt();
+                    showDetectionBox();
+                }
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(showResults, 800);
+                }
+            }, 60);
+        }
+
+        function showDetectionBox() {
+            const overlay = document.getElementById('detectionOverlay');
+            const issue = currentSample.issue;
+            
+            const box = document.createElement('div');
+            box.className = `detection-box ${issue.severity}`;
+            box.style.top = issue.box.top;
+            box.style.left = issue.box.left;
+            box.style.width = issue.box.width;
+            box.style.height = issue.box.height;
+            
+            const label = document.createElement('div');
+            label.className = 'detection-label';
+            label.textContent = issue.type + ' Detected';
+            label.style.color = issue.severity === 'high' ? '#fca5a5' : '#fcd34d';
+            box.appendChild(label);
+            
+            overlay.appendChild(box);
+        }
+
+        function showResults() {
+            document.getElementById('cameraView').classList.add('hidden');
+            document.getElementById('resultsView').classList.remove('hidden');
+            
+            const issue = currentSample.issue;
+            
+            document.getElementById('timestamp').textContent = new Date().toLocaleString();
+// Add project info to results
+if (currentProject.name) {
+    const franchiseName = document.getElementById('franchiseSelect')?.options[document.getElementById('franchiseSelect').selectedIndex].text || 'N/A';
+    
+    const projectInfo = `
+        <div style="background: var(--bg-card); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 3px solid var(--primary);">
+            <div style="font-size: 0.875rem; color: var(--text-secondary);">Project Type:</div>
+            <div style="font-weight: 600; margin-bottom: 0.5rem;">${franchiseName}</div>
+            <div style="font-size: 0.875rem; color: var(--text-secondary);">Project Name: ${currentProject.name}</div>
+            ${currentProject.address ? `<div style="font-size: 0.875rem; color: var(--text-secondary);">Location: ${currentProject.address}</div>` : ''}
+        </div>
+    `;
+    document.querySelector('#resultsView h2').insertAdjacentHTML('afterend', projectInfo);
+}
+            document.getElementById('resultImage').src = currentSample.image;
+            document.getElementById('confidenceValue').textContent = currentSample.confidence + '%';
+            document.getElementById('issuesCount').textContent = '1';
+            document.getElementById('costValue').textContent = issue.cost;
+            
+            const resultOverlay = document.getElementById('resultOverlay');
+            resultOverlay.innerHTML = '';
+            const box = document.createElement('div');
+            box.className = `detection-box ${issue.severity}`;
+            box.style.top = issue.box.top;
+            box.style.left = issue.box.left;
+            box.style.width = issue.box.width;
+            box.style.height = issue.box.height;
+            resultOverlay.appendChild(box);
+            
+            document.getElementById('issuesList').innerHTML = `
+                <div class="issue-item">
+                    <div class="issue-header-row">
+                        <div>
+                            <div class="issue-title">${issue.type}</div>
+                            <div class="issue-location">${issue.location}</div>
+                        </div>
+                        <div class="severity-badge severity-${issue.severity}">${issue.severity.toUpperCase()}</div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">${issue.desc}</p>
+                    <div class="issue-meta">
+                        <div>
+                            <div class="meta-label">AI Confidence</div>
+                            <div class="meta-value">${issue.confidence}%</div>
+                        </div>
+                        <div>
+                            <div class="meta-label">Est. Cost</div>
+                            <div class="meta-value">${issue.cost}</div>
+                        </div>
+                        <div>
+                            <div class="meta-label">Urgency</div>
+                            <div class="meta-value" style="color: ${issue.severity === 'high' ? 'var(--danger)' : 'var(--warning)'};">${issue.urgency}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            window.scrollTo(0, 0);
+        }
+async function exportPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p', 'mm', 'a4');
+    const issue = currentSample.issue;
+    const pw = doc.internal.pageSize.getWidth();
+    const ph = doc.internal.pageSize.getHeight();
+    const m = 20;
+    const cw = pw - (m * 2);
+    
+    // Blue header background
+    doc.setFillColor(37, 99, 235);
+    doc.rect(0, 0, pw, 45, 'F');
+    
+    // Company branding
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(24);
+    doc.setFont(undefined, 'bold');
+    doc.text('VS Brands Project Estimator', m, 20);
+    
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'normal');
+    doc.text('AI-Powered Project Estimate Report', m, 28);
+    doc.text('Powered by Veteran Service Brands', m, 34);
+    
+    // Metadata box
+    doc.setTextColor(0, 0, 0);
+    doc.setFillColor(248, 250, 252);
+    doc.roundedRect(m, 55, cw, 25, 2, 2, 'F');
+    
+    doc.setFontSize(9);
+    doc.setFont(undefined, 'bold');
+    doc.text('Report Date:', m + 5, 63);
+    doc.text('Analysis ID:', m + 5, 70);
+    doc.text('Confidence:', m + 5, 77);
+    
+    doc.setFont(undefined, 'normal');
+    const ts = new Date().toLocaleString();
+    doc.text(ts, m + 30, 63);
+    doc.text('SSA-' + Math.random().toString(36).substr(2, 9).toUpperCase(), m + 30, 70);
+    doc.text(currentSample.confidence + '%', m + 30, 77);
+    
+    // Executive Summary
+    let y = 90;
+    doc.setFontSize(16);
+    doc.setFont(undefined, 'bold');
+    doc.setTextColor(37, 99, 235);
+    doc.text('Executive Summary', m, y);
+    
+    y += 10;
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont(undefined, 'normal');
+    
+    const sum = 'AI-powered analysis report provides detailed findings, assessment, and recommended actions based on advanced computer vision algorithms.';
+    const sumLines = doc.splitTextToSize(sum, cw);
+    doc.text(sumLines, m, y);
+    y += sumLines.length * 5 + 10;
+    
+    // Critical Finding Alert Box
+    doc.setFillColor(254, 226, 226);
+    doc.setDrawColor(239, 68, 68);
+    doc.setLineWidth(0.5);
+    doc.roundedRect(m, y, cw, 40, 2, 2, 'FD');
+    
+    doc.setFontSize(14);
+    doc.setFont(undefined, 'bold');
+    doc.setTextColor(220, 38, 38);
+    doc.text('💰 Project Estimate', m + 5, y + 8);
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.text(issue.type, m + 5, y + 16);
+    
+    doc.setFontSize(9);
+    doc.setFont(undefined, 'normal');
+    doc.text('Location: ' + issue.location, m + 5, y + 23);
+    doc.text('Severity: ' + issue.severity.toUpperCase(), m + 5, y + 29);
+    doc.text('Estimated Cost: ' + issue.cost, m + 5, y + 35);
+    
+    y += 50;
+    
+// Analysis Image Section
+doc.setFontSize(14);
+doc.setFont(undefined, 'bold');
+doc.setTextColor(37, 99, 235);
+doc.text('Analysis Image', m, y);
+y += 5;
+
+// Add the image directly from URL with CORS proxy
+try {
+    const imgSrc = currentSample.image;
+    doc.addImage(imgSrc, 'JPEG', m, y, cw, 80, undefined, 'FAST');
+    y += 90;
+} catch (error) {
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    doc.text('Image URL: ' + currentSample.image, m, y);
+    y += 10;
+}
+    
+    // Check if we need a new page
+    if (y > ph - 80) {
+        doc.addPage();
+        y = 20;
+    }
+    
+    // Detailed Analysis
+    doc.setFontSize(14);
+    doc.setFont(undefined, 'bold');
+    doc.setTextColor(37, 99, 235);
+    doc.text('Detailed Analysis', m, y);
+    y += 8;
+    
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont(undefined, 'normal');
+    const detailLines = doc.splitTextToSize(issue.desc, cw);
+    doc.text(detailLines, m, y);
+    y += detailLines.length * 5 + 10;
+    
+    // Recommendations Section
+    doc.setFontSize(14);
+    doc.setFont(undefined, 'bold');
+    doc.setTextColor(37, 99, 235);
+    doc.text('Recommendations', m, y);
+    y += 8;
+    
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'normal');
+    doc.setTextColor(0, 0, 0);
+    
+    const recs = [
+        '• Immediate professional inspection by certified structural engineer',
+        '• Document all findings with additional photography',
+        '• Obtain repair quotes from licensed contractors',
+        '• Address within recommended urgency timeframe: ' + issue.urgency,
+        '• Monitor for progression until repairs are completed'
+    ];
+    
+    recs.forEach(rec => {
+        if (y > ph - 20) {
             doc.addPage();
             y = 20;
         }
-        
-        // Detailed Analysis
-        doc.setFontSize(14);
-        doc.setFont(undefined, 'bold');
-        doc.setTextColor(37, 99, 235);
-        doc.text('Detailed Analysis', m, y);
-        y += 8;
-        
-        doc.setFontSize(10);
-        doc.setTextColor(0, 0, 0);
-        doc.setFont(undefined, 'normal');
-        const detailLines = doc.splitTextToSize(issue.desc, cw);
-        doc.text(detailLines, m, y);
-        y += detailLines.length * 5 + 10;
-        
-        // Recommendations Section
-        doc.setFontSize(14);
-        doc.setFont(undefined, 'bold');
-        doc.setTextColor(37, 99, 235);
-        doc.text('Recommendations', m, y);
-        y += 8;
-        
-        doc.setFontSize(10);
-        doc.setFont(undefined, 'normal');
-        doc.setTextColor(0, 0, 0);
-        
-        const recs = [
-            `• Contact the nearest local ${issue.type.split('®')[0].trim()} franchise for a final on-site quote.`,
-            `• Prepare the site: The analysis suggests ${issue.desc.includes('prep') ? 'additional prep work is likely needed.' : 'the surface is in good condition.'}`,
-            `• Address project timeline: Recommended urgency timeframe is ${issue.urgency}.`,
-            '• Review the full report details and share with your facility management team.'
-        ];
-        
-        recs.forEach(rec => {
-            if (y > ph - 20) {
-                doc.addPage();
-                y = 20;
-            }
-            doc.text(rec, m, y);
-            y += 7;
-        });
-        
-        // Footer disclaimer
-        const footerY = ph - 25;
+        doc.text(rec, m, y);
+        y += 7;
+    });
+    
+    // Footer disclaimer
+    const footerY = ph - 25;
+    doc.setFontSize(8);
+    doc.setTextColor(100, 100, 100);
+    doc.setFont(undefined, 'italic');
+    const disclaimer = 'This preliminary estimate is generated by AI-assisted analysis based on user inputs. The final project cost requires a local franchise inspection. Estimate provided by Veteran Service Brands.' 
+    const disclaimerLines = doc.splitTextToSize(disclaimer, cw);
+    doc.text(disclaimerLines, m, footerY);
+    
+    doc.setDrawColor(200, 200, 200);
+    doc.line(m, footerY - 5, pw - m, footerY - 5);
+    
+    // Page numbers
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
         doc.setFontSize(8);
-        doc.setTextColor(100, 100, 100);
-        doc.setFont(undefined, 'italic');
-        const disclaimer = 'This preliminary estimate is generated by AI-assisted analysis based on user inputs. The final project cost requires a local franchise inspection. Estimate provided by Veteran Service Brands.'
-        const disclaimerLines = doc.splitTextToSize(disclaimer, cw);
-        doc.text(disclaimerLines, m, footerY);
-        
-        doc.setDrawColor(200, 200, 200);
-        doc.line(m, footerY - 5, pw - m, footerY - 5);
-        
-        // Page numbers
-        const pageCount = doc.internal.getNumberOfPages();
-        for (let i = 1; i <= pageCount; i++) {
-            doc.setPage(i);
-            doc.setFontSize(8);
-            doc.setTextColor(150, 150, 150);
-            doc.text('Page ' + i + ' of ' + pageCount, pw - m - 20, ph - 10);
-        }
-        
-        // Save the PDF
-        const filename = 'VSBrands_Estimate_' + new Date().toISOString().slice(0, 10) + '.pdf';
-        doc.save(filename);
+        doc.setTextColor(150, 150, 150);
+        doc.text('Page ' + i + ' of ' + pageCount, pw - m - 20, ph - 10);
     }
     
-    // --- DYNAMIC CLICK HANDLERS (MUST BE OUTSIDE ALL OTHER FUNCTIONS) ---
+    // Save the PDF
+   const filename = 'VSBrands_Estimate_' + new Date().toISOString().slice(0,10) + '.pdf';
+    doc.save(filename);
+}
 
-    // This runs once the window loads and attaches the click handler to the button.
-    window.onload = function() {
-        const startButton = document.getElementById('startEstimateBtn');
-        
-        // Ensure the button exists and the openProjectModal function is defined
-        if (startButton && typeof openProjectModal === 'function') {
-            startButton.addEventListener('click', openProjectModal);
-        }
-    };
-</script>
+    </script>
+</body>
+</html>
