@@ -628,7 +628,7 @@ textarea.form-input {
         </div>
     </div>
 </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
     const samples = {
@@ -698,7 +698,87 @@ textarea.form-input {
         franchise: ''
     };
 
-    // --- NEW FRANCHISE ESTIMATOR LOGIC (Dynamic Form Update) ---
+    // --- CORE NAVIGATION FUNCTIONS ---
+
+    function showDashboard() {
+        document.getElementById('dashboardView').classList.remove('hidden');
+        document.getElementById('sampleView').classList.add('hidden');
+        document.getElementById('cameraView').classList.add('hidden');
+        document.getElementById('resultsView').classList.add('hidden');
+    }
+
+    function openProjectModal() {
+        document.getElementById('projectModal').classList.remove('hidden');
+    }
+
+    function closeProjectModal() {
+        document.getElementById('projectModal').classList.add('hidden');
+        
+        // Use optional chaining (?.) to safely clear only the fields that are present in the HTML.
+        document.getElementById('projectName')?.value = '';
+        document.getElementById('propertyAddress')?.value = '';
+        document.getElementById('scanNotes')?.value = '';
+        
+        // Manually ensure the franchise selector reset is safe.
+        const selector = document.getElementById('franchiseSelect');
+        if (selector) {
+            selector.value = '';
+            updateProjectVariables();
+        }
+    }
+
+    // THIS FUNCTION IS NOW DEFINED GLOBALLY, NOT INSIDE closeProjectModal
+    function saveProjectAndContinue() {
+        const projectName = document.getElementById('projectName').value.trim();
+        const franchiseSelect = document.getElementById('franchiseSelect').value;
+
+        if (!projectName || !franchiseSelect) {
+            alert('Please enter a **Project Name** AND select a **Franchise Project Type**.');
+            return;
+        }
+        
+        currentProject = {
+            name: projectName,
+            address: document.getElementById('propertyAddress')?.value.trim(),
+            notes: document.getElementById('scanNotes')?.value.trim(),
+            franchise: franchiseSelect,
+            date: new Date().toLocaleString()
+        };
+        
+        closeProjectModal();
+
+        // Determine which franchise sample to load
+        let sampleKeyToLoad = 'water'; 
+        
+        if (franchiseSelect === 'parking') {
+            sampleKeyToLoad = 'corrosion'; 
+        } else if (franchiseSelect === 'painting') {
+            sampleKeyToLoad = 'crack'; 
+        } else if (franchiseSelect === 'athletic') {
+            sampleKeyToLoad = 'athletic'; 
+        }
+        
+        selectSample(sampleKeyToLoad); 
+    }
+
+    function showSamples() {
+        document.getElementById('dashboardView').classList.add('hidden');
+        document.getElementById('sampleView').classList.remove('hidden');
+        document.getElementById('cameraView').classList.add('hidden');
+        document.getElementById('resultsView').classList.add('hidden');
+    }
+
+    function selectSample(type) {
+        currentSample = samples[type];
+        document.getElementById('sampleView').classList.add('hidden');
+        document.getElementById('cameraView').classList.remove('hidden');
+        document.getElementById('previewImage').src = currentSample.image;
+        document.getElementById('detectionOverlay').innerHTML = '';
+        document.getElementById('analysisStatus').classList.add('hidden');
+        document.getElementById('analyzeBtn').disabled = false;
+    }
+
+    // --- DYNAMIC FORM UPDATE ---
     function updateProjectVariables() {
         const selector = document.getElementById('franchiseSelect');
         const variablesDiv = document.getElementById('dynamicVariables');
@@ -798,89 +878,7 @@ textarea.form-input {
         variablesDiv.innerHTML = htmlContent;
     }
 
-    // --- CORE NAVIGATION FUNCTIONS ---
-
-    function showDashboard() {
-        document.getElementById('dashboardView').classList.remove('hidden');
-        document.getElementById('sampleView').classList.add('hidden');
-        document.getElementById('cameraView').classList.add('hidden');
-        document.getElementById('resultsView').classList.add('hidden');
-    }
-
-    function openProjectModal() {
-        document.getElementById('projectModal').classList.remove('hidden');
-    }
-
-    // THIS FUNCTION IS NOW BULLETPROOF AGAINST MISSING FIELDS
-    function closeProjectModal() {
-        document.getElementById('projectModal').classList.add('hidden');
-        
-        // Use optional chaining (?.) to safely clear only the fields that are present in the HTML.
-        document.getElementById('projectName')?.value = '';
-        document.getElementById('propertyAddress')?.value = '';
-        document.getElementById('scanNotes')?.value = '';
-        
-        // Manually ensure the franchise selector reset is safe.
-        const selector = document.getElementById('franchiseSelect');
-        if (selector) {
-            selector.value = '';
-            updateProjectVariables();
-        }
-    }
-
-    // THIS FUNCTION HANDLES VALIDATION AND NAVIGATION TO ANALYSIS SCREEN
-    function saveProjectAndContinue() {
-        const projectName = document.getElementById('projectName').value.trim();
-        const franchiseSelect = document.getElementById('franchiseSelect').value;
-
-        if (!projectName || !franchiseSelect) {
-            alert('Please enter a **Project Name** AND select a **Franchise Project Type**.');
-            return;
-        }
-        
-        currentProject = {
-            name: projectName,
-            address: document.getElementById('propertyAddress')?.value.trim(),
-            notes: document.getElementById('scanNotes')?.value.trim(),
-            franchise: franchiseSelect,
-            date: new Date().toLocaleString()
-        };
-        
-        closeProjectModal();
-
-        // Determine which franchise sample to load
-        let sampleKeyToLoad = 'water'; // MACH ONE® Epoxy Floors (default/water)
-        
-        if (franchiseSelect === 'parking') {
-            sampleKeyToLoad = 'corrosion'; // G-FORCE® Parking Lot Striping
-        } else if (franchiseSelect === 'painting') {
-            sampleKeyToLoad = 'crack'; // PAINT CORPS® Painting Services
-        } else if (franchiseSelect === 'athletic') {
-            sampleKeyToLoad = 'athletic'; // FIELD OPS® Athletic Field Markings
-        }
-        
-        // Jump directly to the Analysis View with the correct sample image loaded
-        selectSample(sampleKeyToLoad); 
-    }
-
-    function showSamples() {
-        document.getElementById('dashboardView').classList.add('hidden');
-        document.getElementById('sampleView').classList.remove('hidden');
-        document.getElementById('cameraView').classList.add('hidden');
-        document.getElementById('resultsView').classList.add('hidden');
-    }
-
-    function selectSample(type) {
-        currentSample = samples[type];
-        document.getElementById('sampleView').classList.add('hidden');
-        document.getElementById('cameraView').classList.remove('hidden');
-        document.getElementById('previewImage').src = currentSample.image;
-        document.getElementById('detectionOverlay').innerHTML = '';
-        document.getElementById('analysisStatus').classList.add('hidden');
-        document.getElementById('analyzeBtn').disabled = false;
-    }
-
-    // --- AI PROMPT GENERATOR (Required for the runAnalysis to work) ---
+    // --- AI PROMPT GENERATOR ---
     function generateGeminiPrompt() {
         const franchiseKey = currentProject.franchise;
         const notes = currentProject.notes;
@@ -926,7 +924,6 @@ textarea.form-input {
         console.log(finalPrompt);
         console.log("------------------------------");
     }
-    // --- END AI PROMPT GENERATOR ---
 
     function runAnalysis() {
         document.getElementById('analyzeBtn').disabled = true;
@@ -1226,18 +1223,15 @@ textarea.form-input {
         doc.save(filename);
     }
     
-    // --- Modal Activation Script (Fixes the undefined button issue) ---
+    // --- DYNAMIC CLICK HANDLERS (MUST BE OUTSIDE ALL OTHER FUNCTIONS) ---
+
+    // This runs once the window loads and attaches the click handler to the button.
     window.onload = function() {
-        // We will target the action card DIV and attach the click listener
-        const startButton = document.querySelector('.action-card');
+        const startButton = document.getElementById('startEstimateBtn');
         
+        // Ensure the button exists and the openProjectModal function is defined
         if (startButton && typeof openProjectModal === 'function') {
             startButton.addEventListener('click', openProjectModal);
-            // Remove the hardcoded onclick if it exists to prevent double firing (safeguard)
-            startButton.removeAttribute('onclick');
-        } 
+        }
     };
-    // --- End Modal Activation Script ---
 </script>
-</body>
-</html>
