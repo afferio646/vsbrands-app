@@ -827,8 +827,8 @@ function closeProjectModal() {
         selector.value = '';
         updateProjectVariables();
      }
-    }
-function saveProjectAndContinue() {
+    
+    function saveProjectAndContinue() {
     const projectName = document.getElementById('projectName').value.trim();
     const franchiseSelect = document.getElementById('franchiseSelect').value;
 
@@ -1174,7 +1174,16 @@ try {
    const filename = 'VSBrands_Estimate_' + new Date().toISOString().slice(0,10) + '.pdf';
     doc.save(filename);
 }
-
+// --- Modal Activation Script ---
+window.onload = function() {
+    const startButton = document.getElementById('startEstimateBtn');
+    
+    // Check if the button exists and the function is defined before attaching
+    if (startButton && typeof openProjectModal === 'function') {
+        startButton.addEventListener('click', openProjectModal);
+    } 
+};
+// --- End Modal Activation Script ---
     </script>
 </body>
 </html>
